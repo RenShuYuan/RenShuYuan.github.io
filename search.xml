@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Qt中QScrollArea类的简单使用心得]]></title>
+    <url>%2F2017%2F09%2F03%2FQt%E4%B8%ADQScrollArea%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%2F</url>
+    <content type="text"><![CDATA[摘要: 简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。 根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea则会出现滚动条，但是从名字可以看出这个函数是用于设置一个QWidget，而不能用于不断的添加QWidget，所以这里面并不能像大家想的那样来直接实现上面的效果，而是需要创建一个自己的QWidget，再在其中来添加自己需要的控件。 下面给出代码看看，由于我的滚动窗口是已经用设计器添加到对话框上的，所以我直接用ui-&gt;scrollArea来调用，buttonListWidget是我重新实现的QWidget子类，等会在下面可以看到实现代码：123buttonListWidget *buttonList = new buttonListWidget(this);buttonList-&gt;initWidget(strList);ui-&gt;scrollArea-&gt;setWidget(buttonList); buttonListWidget类，其实内容不多，但是主要是掌握到方法： buttonListWidget.h1234567891011class buttonListWidget : public QWidget&#123; Q_OBJECTpublic: explicit buttonListWidget(QWidget *parent = 0); void initWidget(QStringList&amp; nameList);signals:public slots:&#125;; buttonListWidget.cpp12345678910111213141516buttonListWidget::buttonListWidget(QWidget *parent) : QWidget(parent)&#123;&#125;void buttonListWidget::initWidget(QStringList &amp;nameList)&#123; QHBoxLayout *layout = new QHBoxLayout(this); foreach (QString str, nameList) &#123; QPushButton *button = new QPushButton(str, this); button-&gt;setMinimumSize(button-&gt;size()); layout-&gt;addWidget(button); &#125; this-&gt;setLayout(layout);&#125; 本文出自蛋炒饭的博客 http://yoursite.com/2017/09/03/Qt中QScrollArea类的简单使用心得/ 欢迎转载，转载请注明出处！]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+        <tag>QScrollArea</tag>
+        <tag>滚动窗口</tag>
+        <tag>QWidget</tag>
+      </tags>
+  </entry>
+</search>
