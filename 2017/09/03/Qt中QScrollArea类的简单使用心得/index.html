@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="摘要: 简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。 　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea">
+<meta name="description" content="简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。  　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea则会出">
 <meta name="keywords" content="Qt,QScrollArea,滚动窗口,QWidget">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt中QScrollArea类的简单使用心得">
 <meta property="og:url" content="http://yoursite.com/2017/09/03/Qt中QScrollArea类的简单使用心得/index.html">
-<meta property="og:site_name" content="小袁私房菜">
-<meta property="og:description" content="摘要: 简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。 　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea">
+<meta property="og:site_name" content="逝去">
+<meta property="og:description" content="简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。  　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea则会出">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ovormws1o.bkt.clouddn.com/134010_BaU7_2660258.png">
-<meta property="og:updated_time" content="2017-09-03T14:24:47.482Z">
+<meta property="og:updated_time" content="2017-09-10T15:57:59.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Qt中QScrollArea类的简单使用心得">
-<meta name="twitter:description" content="摘要: 简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。 　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea">
+<meta name="twitter:description" content="简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。  　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果： 　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea则会出">
 <meta name="twitter:image" content="http://ovormws1o.bkt.clouddn.com/134010_BaU7_2660258.png">
 
 
@@ -143,7 +143,7 @@
 
 
 
-  <title>Qt中QScrollArea类的简单使用心得 | 小袁私房菜</title>
+  <title>Qt中QScrollArea类的简单使用心得 | 逝去</title>
   
 
 
@@ -173,7 +173,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">小袁私房菜</span>
+        <span class="site-title">逝去</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -323,7 +323,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小袁私房菜">
+      <meta itemprop="name" content="逝去">
     </span>
 
     
@@ -419,7 +419,8 @@
       
 
       
-        <p>　　<em>摘要: 简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。</em></p>
+        <p>　　<em>简要说明如何在QScrollArea滚动窗口中添加多个QWidget的使用方法。</em></p>
+<hr>
 <p>　　根据自己目前的需求简单说下怎么在QScrollArea滚动窗口中实现多个控件的滚动显示，先看看最终效果：<br><img src="http://ovormws1o.bkt.clouddn.com/134010_BaU7_2660258.png" alt="效果" title="效果"></p>
 <p>　　先说一下在QScrollArea滚动窗口中要添加控件要使用QScrollArea::setWidget(QWidget * widget)这个函数，当添加的控件显示范围大于scrollArea则会出现滚动条，但是从名字可以看出这个函数是用于设置一个QWidget，而不能用于不断的添加QWidget，所以这里面并不能像大家想的那样来直接实现上面的效果，而是需要创建一个自己的QWidget，再在其中来添加自己需要的控件。</p>
 <p>　　下面给出代码看看，由于我的滚动窗口是已经用设计器添加到对话框上的，所以我直接用ui-&gt;scrollArea来调用，buttonListWidget是我重新实现的QWidget子类，等会在下面可以看到实现代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buttonListWidget *buttonList = <span class="keyword">new</span> buttonListWidget(<span class="keyword">this</span>);</div><div class="line">buttonList-&gt;initWidget(strList);</div><div class="line">ui-&gt;scrollArea-&gt;setWidget(buttonList);</div></pre></td></tr></table></figure></p>
@@ -482,6 +483,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/10/利用C-进行QGis开发之-创建临时图层并添加要素/" rel="prev" title="利用C++进行QGis开发之<创建临时图层并添加要素>">
+                利用C++进行QGis开发之<创建临时图层并添加要素> <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -556,7 +573,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -567,7 +584,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -578,7 +595,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
