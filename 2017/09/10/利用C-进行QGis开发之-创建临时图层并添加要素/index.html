@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  先将整个流程大概梳理下 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码12345">
+<meta name="description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  [TOC]  整个流程梳理 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码123">
 <meta name="keywords" content="c++,QGis,二次开发,创建临时图层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用C++进行QGis开发之&lt;创建临时图层并添加要素&gt;">
 <meta property="og:url" content="http://yoursite.com/2017/09/10/利用C-进行QGis开发之-创建临时图层并添加要素/index.html">
 <meta property="og:site_name" content="逝去">
-<meta property="og:description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  先将整个流程大概梳理下 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码12345">
+<meta property="og:description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  [TOC]  整个流程梳理 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码123">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ovormws1o.bkt.clouddn.com/2017-09-10-23-14023302_gNVy_2660258.png">
-<meta property="og:updated_time" content="2017-09-10T16:18:38.778Z">
+<meta property="og:updated_time" content="2017-09-11T06:53:58.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用C++进行QGis开发之&lt;创建临时图层并添加要素&gt;">
-<meta name="twitter:description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  先将整个流程大概梳理下 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码12345">
+<meta name="twitter:description" content="其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。  [TOC]  整个流程梳理 首先创建一个临时(memory)矢量图层 ; 将创建的图层添加到地图画布中 ; 创建几何要素 ; 将几何要素添加到矢量图层中 ; 更新图层范围并刷新画布 。   程序整体代码123">
 <meta name="twitter:image" content="http://ovormws1o.bkt.clouddn.com/2017-09-10-23-14023302_gNVy_2660258.png">
 
 
@@ -421,7 +421,9 @@
       
         <p>　　<em>其实本文实现的功能类似于QGis中“添加文本数据图层”的一个简化版，本文不会涉及到对话框的使用，不通过与用户互交的方式创建要素，而是直接通过代码方式添加点要素，起到一个抛砖引玉的作用。</em></p>
 <hr>
-<h2 id="先将整个流程大概梳理下"><a href="#先将整个流程大概梳理下" class="headerlink" title="先将整个流程大概梳理下"></a>先将整个流程大概梳理下</h2><ol>
+<p>[TOC]</p>
+<hr>
+<h2 id="整个流程梳理"><a href="#整个流程梳理" class="headerlink" title="整个流程梳理"></a>整个流程梳理</h2><ol>
 <li>首先创建一个临时(memory)矢量图层 ;</li>
 <li>将创建的图层添加到地图画布中 ;</li>
 <li>创建几何要素 ;</li>
@@ -432,7 +434,7 @@
 <h2 id="程序整体代码"><a href="#程序整体代码" class="headerlink" title="程序整体代码"></a>程序整体代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 测试代码</span></div><div class="line"></div><div class="line"><span class="comment">/* "Point?crs=EPSG:4326&amp;field=id:integer&amp;</span></div><div class="line"><span class="comment"> * field=name:string(50)&amp;index=yes&amp;</span></div><div class="line"><span class="comment"> * memoryid=&#123;63152c31-9f38-4410-9983-fc9abe84973f&#125;"</span></div><div class="line"><span class="comment"> */</span></div><div class="line">QString layerProperties = <span class="string">"Point?"</span>;    <span class="comment">// 几何类型</span></div><div class="line">layerProperties.append(QString( <span class="string">"crs=EPSG:4326&amp;"</span> ));    <span class="comment">// 参照坐标系</span></div><div class="line">layerProperties.append(QString( <span class="string">"field=id:integer&amp;field=name:string(50)&amp;"</span> ));    <span class="comment">// 添加字段</span></div><div class="line">layerProperties.append(QString( <span class="string">"index=yes&amp;"</span> ));        <span class="comment">// 创建索引</span></div><div class="line">layerProperties.append(QString(                         <span class="comment">// 临时编码</span></div><div class="line"><span class="string">"memoryid=%1"</span> ).arg( QUuid::createUuid().toString() ));</div><div class="line"></div><div class="line">QgsVectorLayer* newLayer = <span class="keyword">new</span> QgsVectorLayer( </div><div class="line">layerProperties, QString( <span class="string">"临时点层"</span> ), QString( <span class="string">"memory"</span> ) );</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!newLayer-&gt;isValid())</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 添加到地图</span></div><div class="line">QgsMapLayerRegistry::instance()-&gt;addMapLayer(newLayer);</div><div class="line"></div><div class="line">QgsVectorDataProvider* dateProvider = newLayer-&gt;dataProvider();</div><div class="line"></div><div class="line"><span class="comment">// 创建点</span></div><div class="line">QgsFeature MyFeature;</div><div class="line">MyFeature.setGeometry( QgsGeometry::fromPoint(QgsPoint(<span class="number">102.4443</span>, <span class="number">32.2123</span>)) );</div><div class="line">MyFeature.setAttributes(QgsAttributes() &lt;&lt; QVariant(<span class="number">1</span>) &lt;&lt; QVariant(<span class="string">"test"</span>));</div><div class="line"></div><div class="line">QgsFeature MyFeature1;</div><div class="line">MyFeature1.setGeometry( QgsGeometry::fromPoint(QgsPoint(<span class="number">102.4643</span>, <span class="number">32.2133</span>)) );</div><div class="line">MyFeature1.setAttributes(QgsAttributes() &lt;&lt; QVariant(<span class="number">2</span>) &lt;&lt; QVariant(<span class="string">"test1"</span>));</div><div class="line"></div><div class="line"><span class="comment">// 开始编辑</span></div><div class="line">newLayer-&gt;startEditing();</div><div class="line"></div><div class="line"><span class="comment">// 添加要素</span></div><div class="line">dateProvider-&gt;addFeatures(QgsFeatureList() &lt;&lt; MyFeature &lt;&lt; MyFeature1);</div><div class="line"></div><div class="line"><span class="comment">// 保存</span></div><div class="line">newLayer-&gt;commitChanges();</div><div class="line"></div><div class="line"><span class="comment">// 更新范围</span></div><div class="line">newLayer-&gt;updateExtents();</div><div class="line">mMapCanvas-&gt;refresh();</div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure>
 <hr>
 <h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ol>
-<li><strong>创建临时图层</strong><br>　　第3-11行，这段代码可能是我与网上其他的教程中比较不一样的地方，这里通过构造一种URL形式的字符串，通过上面的注释大家应该都大概明白这个字符串的意思了，通过这种形式很简洁方便的使我们将要创建的图层具备了多个条件，特别是简化对于图层字段的添加。</li>
+<li>创建临时图层<br>　　第3-11行，这段代码可能是我与网上其他的教程中比较不一样的地方，这里通过构造一种URL形式的字符串，通过上面的注释大家应该都大概明白这个字符串的意思了，通过这种形式很简洁方便的使我们将要创建的图层具备了多个条件，特别是简化对于图层字段的添加。</li>
 </ol>
 <p>　　第7行 <code>QString layerProperties = &quot;Point?&quot;</code>定义了我们创建图层的几何类型，可以是<code>&quot;Point&quot;、&quot;LineString&quot;、&quot;Polygon&quot;、&quot;MultiPoint&quot;、&quot;MultiLineString&quot;、&quot;MultiPolygon&quot;</code>其中之一。</p>
 <p>　　第8行<code>QString( &quot;crs=EPSG:4326&amp;&quot; )</code>是图层的参照坐标系，定义一个正确的坐标系是一个良好的习惯，如果需要一定灵活性可以参照QGis的方式通过对话框选取，或是根据自己的需求来实现，需要改变的仅仅是<code>&quot;EPSG:4326&quot;</code>而已。</p>
@@ -526,6 +528,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/09/17/putty详细使用说明/" rel="prev" title="putty详细使用说明">
+                putty详细使用说明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -611,7 +617,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -622,7 +628,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -633,7 +639,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -692,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先将整个流程大概梳理下"><span class="nav-number">1.</span> <span class="nav-text">先将整个流程大概梳理下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序整体代码"><span class="nav-number">2.</span> <span class="nav-text">程序整体代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">3.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">4.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整个流程梳理"><span class="nav-number">1.</span> <span class="nav-text">整个流程梳理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序整体代码"><span class="nav-number">2.</span> <span class="nav-text">程序整体代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">3.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">4.</span> <span class="nav-text">效果图</span></a></li></ol></div>
             
 
           </div>
